@@ -198,5 +198,55 @@ this is global variable
 )
 ```
 
+### multi information 
 
+```
+(age Andrew 20)
+(weight Andrew 80)
+(height Andrew 188)
+(blood-pressure Andrew 130 80)
+(age brenda 23)
+(weight brenda 50)
+(height brenda 140)
+(blood-pressure brenda 120 60)
+```
 
+this can pretty much do the job to hold multiple information,
+but i think template could do that more neatly
+
+here how to create template
+
+```
+(deftemplate personal-data
+    (slot name)
+    (slot age)
+    (slot weight)
+    (slot height)
+    (multislot blood-pressure)
+)
+```
+
+and here how to create fact from template 
+
+```
+(assert (personal-data (name Andrew) (age 20) (weight 80)
+(height 188) (blood-pressure 130 80)))
+```
+
+you dont have to put all the info
+
+```
+(assert (personal-data (weight 150) (age 23) (name Brenda)))
+```
+
+information inside template can be altered using `modify`
+
+```
+(defrule birthday
+?birthday <- (birthday ?name)
+?data-fact <- (personal-data (name ?name) (age ?age))
+=>
+(modify ?data-fact (age (+ ?age 1)))
+(retract ?birthday)
+)
+```
