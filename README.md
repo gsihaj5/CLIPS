@@ -115,6 +115,88 @@ try and run it
 
 ### variables
 
+while utilizing wild card add identifier to declare it as variables
+
+`?name`
+
+while calling `?name` again it will act as variables
+
+calling rules and get the facts
+
+first rules
+
+```
+(defrule mammal
+(animal ?name)
+(warm-blooded ?name)
+(not (lays-eggs ?name))
+=>
+(assert (mammal ?name))
+(printout t ?name " is a mammal" crlf))
+```
+
+second rule
+```
+(defrule remove-mammals
+?fact <- (mammal ?)
+=>
+(printout t "retracting " ?fact crlf)
+(retract ?fact))
+```
+
+on this second rule, the result from `mammals` rule is injected to a variable called `?fact`
+
+
+### logic and math
+
+```
+(defrule take-umbrella
+(or (weather raining)
+(weather snowing))
+=>
+(assert (umbrella required)))
+```
+
+math ...
+
+```
+(+ 5 7) -> 12
+
+(- 5 7) -> -2
+
+(* 5 7) -> 35
+
+(/5 7) -> 0.714...
+```
+
+### user input
+
+it will prompt user to input if there is `read` keyword
+
+```
+(defrule what-is-child
+(animal ?name)
+(not (child-of ?name ?))
+=>
+(printout t "What do you call the child of a " ?name "?")
+(assert (child-of ?name (read))))
+```
+
+multi wild cards `$?`
+
+multi-field variables `$?members`
+
+assigning value to variables `bind ?total (+ ?x ?y)`
+
+all these variables are local
+
+this is global variable
+```
+(defglobal
+?*var1* = 17
+?*oranges* = "seven"
+)
+```
 
 
 
