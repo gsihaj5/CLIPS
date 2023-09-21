@@ -50,5 +50,40 @@ try run the program using `(run)`
 nothing will appear, but the there is new facts. 
 check it out with `(facts)`
 
+### chaining rules
 
+we already have the `duck` rules
+
+now add 1 more rules 
+```
+(defrule is-it-a-duck
+    (animal-has webbed-feet)
+    (animal-has feathers)
+    =>
+    (assert (animal-is duck))
+)
+```
+
+try `(reset)` the facts to restart. 
+
+now assert 2 facts the `webbed-feet` and `feathers`
+
+after run there should be 4 facts
+
+from this examples we know that this program producing facts
+and governed by rules.
+
+
+### print out something !
+
+redeclare the rules and try it on your own!
+
+```
+(defrule duck
+    (animal-is duck)
+    =>
+    (assert (sound-is quack))
+    (printout t "it’s a duck" crlf)
+)
+```
 
