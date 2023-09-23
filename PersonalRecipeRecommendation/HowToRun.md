@@ -1,5 +1,7 @@
 # Recipe Recommendator
 
+ini adalah penjelasan dari code di PersonalRecipe.clp
+
 ## 1. TEMPLATE
 Sebelum membuat program rekomendasi kita harus
 mendeklarasikan model-model yang terkait
